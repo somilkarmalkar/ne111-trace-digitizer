@@ -755,7 +755,7 @@ def main():
     with st.sidebar:
         st.markdown('<div class="trace-kicker">TRACE / WORKSPACE</div>', unsafe_allow_html=True)
         st.header('Start with a plot')
-        upload = st.file_uploader('Upload a graph image', type=['png','jpg','jpeg','gif','tif','tiff'],
+        upload = st.file_uploader('Upload a graph image', type=['png','jpg','jpeg','gif','tif','tiff'], max_upload_size=20,
                                   help='PNG, JPEG, GIF or TIFF; color and grayscale. Up to 20 MB. Uploading a different image starts a new workspace.')
         pending = None
         if upload is not None:
@@ -765,12 +765,15 @@ def main():
             else:
                 try:
                     count = frame_count(raw)
-                    frame = st.number_input('Image frame / page', 1, count, 1, key='frame')-1 if count > 1 else 0
+                    frame_key = 'frame_' + hashlib.sha256(raw).hexdigest()
+                    frame = st.number_input('Image frame / page', 1, count, 1, key=frame_key)-1 if count > 1 else 0
                     fingerprint = hashlib.sha256(raw+str(frame).encode()).hexdigest()
                     if fingerprint != s.get('last_upload'):
                         pending = (load_image(raw, frame), upload.name, fingerprint)
                 except (ValueError, OSError, Image.DecompressionBombError) as error:
                     st.error(f'Could not open this image: {error}')
+        else:
+            s.last_upload = None
         if pending:
             replace_image(*pending)
             s.last_upload = pending[2]
