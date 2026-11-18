@@ -1,0 +1,12 @@
+NE111 plot digitizer - submission details
+
+Upload this file to LEARN:
+app.py
+
+Paste this running app URL in the submission comment:
+https://ne111-trace-somil.streamlit.app/
+
+Source repository:
+https://github.com/somilkarmalkar/ne111-trace-digitizer
+
+Open the app once more before submitting. Keep its repository and deployment available during marking.
