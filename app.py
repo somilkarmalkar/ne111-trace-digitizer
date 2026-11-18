@@ -530,12 +530,13 @@ export default function(component) {
 """
 
 @st.cache_resource
-def canvas_component():
-    return st.components.v2.component('trace_canvas', html=CANVAS_HTML, css=CANVAS_CSS, js=CANVAS_JS)
+def canvas_component(html, css, js):
+    version = hashlib.sha256((html + css + js).encode()).hexdigest()[:12]
+    return st.components.v2.component('trace_canvas_' + version, html=html, css=css, js=js)
 
 
 def render_canvas(data):
-    return canvas_component()(data=data, key='trace_canvas', on_clicked_change=lambda: None)
+    return canvas_component(CANVAS_HTML, CANVAS_CSS, CANVAS_JS)(data=data, key='trace_canvas', on_clicked_change=lambda: None)
 
 
 # ---------- Session model and interface ----------
