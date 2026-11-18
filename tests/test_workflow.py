@@ -28,7 +28,7 @@ class WorkflowTests(unittest.TestCase):
         second = app.session_state.active_id
         next(x for x in app.text_input if x.label=='Dataset name').set_value('Experiment B').run()
         self.assertEqual(app.session_state.datasets[1]['name'], 'Experiment B')
-        button(app, 'Delete active dataset').click().run()
+        button(app, 'Delete dataset').click().run()
         self.assertEqual(len(app.session_state.datasets), 1)
         button(app, 'Undo').click().run()
         self.assertEqual(app.session_state.datasets[1]['name'], 'Experiment B')

@@ -1,5 +1,9 @@
 # Deploy and submit
 
+Live app: [Trace](https://ne111-trace-somil.streamlit.app/)
+
+Source: [GitHub repository](https://github.com/somilkarmalkar/ne111-trace-digitizer)
+
 The project must run on **Streamlit Community Cloud**. A local address or a source-code repository link is not a substitute for the running app URL. The rubric states that an app that remains inaccessible after a retry receives 0/100.
 
 ## Deploy
@@ -8,7 +12,7 @@ The project must run on **Streamlit Community Cloud**. A local address or a sour
 2. Sign in at [Streamlit Community Cloud](https://share.streamlit.io/) and connect the GitHub account that owns the repository.
 3. In the matching workspace, choose **Create app**, then **Yup, I have an app**.
 4. Select the repository, the branch containing the final code, and `app.py` as the entrypoint. You can enter a missing repository manually or use **Paste GitHub URL**.
-5. Open **Advanced settings** and select **Python 3.12**. No API keys or secrets are needed by this application.
+5. Open **Advanced settings** and select **Python 3.14** (the version used for this deployment and local testing). No API keys or secrets are needed by this application.
 6. Choose a recognizable available app URL if desired, then deploy. Wait for the build to finish and for the actual app to appear. If it fails, inspect the build logs, correct the issue, and redeploy.
 7. Copy the actual running URL ending in `.streamlit.app`.
 

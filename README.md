@@ -1,5 +1,7 @@
 # Trace | Plot Digitizer
 
+[Open the live app](https://ne111-trace-somil.streamlit.app/)
+
 A single-page Streamlit app for extracting numerical data from an image of a graph. The complete application is in `app.py`; the browser canvas is embedded in that file.
 
 ## Run locally
@@ -49,3 +51,27 @@ See `DEPLOYMENT.md` for Streamlit Community Cloud deployment and the final submi
 The image vectors from **O** to **X** and from **O** to **Y** form a two-dimensional coordinate basis. A 2-by-2 inverse maps image pixels into fractional axis positions, so a rotated scan does not need to be physically straightened. Those fractions interpolate the entered reference values. A logarithmic axis interpolates their base-10 logarithms and then exponentiates the result. The inverse mapping places edited table values back on the image.
 
 Manual clicking introduces uncertainty. Zooming and using reference ticks far apart reduce placement error. Perspective-distorted photographs and curved axes are outside the three-point affine model.
+
+
+## Additional tools
+
+- The three bundled examples (linear, rotated and logarithmic) are generated locally and arrive calibrated.
+- Use **Undo** and **Redo** for point, reference, table and dataset changes.
+- **Save workspace** downloads a JSON backup including the image, calibration and all datasets. Use **Resume a saved project** to restore it.
+- For animated GIFs and multipage TIFFs, choose the image frame/page in the sidebar.
+- Reference positions can be adjusted numerically in original-image pixels.
+
+The app accepts images up to 20 MB and 30 million pixels. Transparent images are composited on white; high-bit-depth grayscale images are normalized for display. Image data and edits remain in the current Streamlit session unless you download a backup. The server does not write uploads to disk.
+
+## Verification
+
+```text
+python -m pip install -r requirements-dev.txt
+python -m pytest tests -q
+```
+
+22 automated tests cover numerical calibration, file formats, CSV and Streamlit workflows. Browser checks additionally verify real canvas clicks, zoom and editing. See `VERIFICATION.md` for the final checked scope and limits.
+
+## Development disclosure
+
+Built with OpenAI Codex assistance. Review and understand the calibration equations and application flow before presenting or submitting the project. No external plotting images or copied digitizer implementation are used.

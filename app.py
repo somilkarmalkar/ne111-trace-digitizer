@@ -254,7 +254,7 @@ CANVAS_HTML = r"""
 
 CANVAS_CSS = r"""
 .digitizer { width:100%; color:var(--st-text-color,#183040); font:14px/1.4 var(--st-font,system-ui,sans-serif); border:1px solid #d6e1e5; border-radius:14px; overflow:hidden; background:var(--st-background-color,#fff); box-shadow:0 3px 12px #193d4d08; }
-.canvas-toolbar { min-height:50px; padding:8px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; border-bottom:1px solid #d6e1e5; }
+.canvas-toolbar { min-height:64px; padding:8px 12px; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:5px; border-bottom:1px solid #d6e1e5; }
 .canvas-tools { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
 .canvas-tools button { min-height:32px; min-width:32px; padding:5px 10px; color:inherit; font:inherit; font-weight:550; border:1px solid #cbd9df; border-radius:7px; background:var(--st-background-color,#fff); cursor:pointer; }
 .canvas-tools button:hover { background:#e8f5f3; color:#075e58; border-color:#6bb6ad; }
@@ -262,7 +262,7 @@ CANVAS_CSS = r"""
 .canvas-tools button[aria-pressed="true"] { background:#e6f4f0; color:#075e58; border-color:#8fc7ba; }
 .zoom-value { font-variant-numeric:tabular-nums; min-width:49px; text-align:center; font-size:12px; }
 .tool-divider { height:20px; width:1px; background:#d6e1e5; margin:0 3px; }
-.canvas-readout { color:#627981; font-size:12px; font-variant-numeric:tabular-nums; }
+.canvas-readout { display:block; height:17px; line-height:17px; white-space:nowrap; color:#627981; font-size:12px; font-variant-numeric:tabular-nums; }
 .canvas-stage { position:relative; height:540px; width:100%; background:#edf2f4; overflow:hidden; }
 .canvas-stage canvas { display:block; width:100%; height:100%; cursor:crosshair; touch-action:none; }
 .canvas-loading { position:absolute; inset:0; display:grid; place-items:center; color:#516b77; pointer-events:none; background:#edf2f4; }
@@ -724,7 +724,7 @@ def restore_project(raw):
 
 
 def main():
-    st.set_page_config(page_title='Trace | Plot digitizer', page_icon='📈', layout='wide', initial_sidebar_state='expanded')
+    st.set_page_config(page_title='Trace | Plot digitizer', page_icon='📈', layout='wide', initial_sidebar_state='auto')
     st.markdown('''<style>
       .stApp {background:#f7f9fc; color:#193248;}
       .block-container {padding-top:3.5rem; padding-bottom:2.5rem; max-width:1650px;}
@@ -865,7 +865,7 @@ def main():
             s.datasets.append(new)
             s.active_id = new['id']
             st.rerun()
-        if st.button('Delete active dataset', width='stretch'):
+        if st.button('Delete dataset', width='stretch'):
             remember()
             s.datasets = [d for d in s.datasets if d['id']!=active_id]
             if not s.datasets:
